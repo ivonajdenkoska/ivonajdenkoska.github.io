@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Context Diffusion: In-Context Aware Image Generation.">
+  <meta name="keywords" content="Context Diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Context Diffusion: In-Context Aware Image Generation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.jpg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body hero-body-padding">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Context Diffusion: <br> In-Context Aware Image Generation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://ivonajdenkoska.github.io/">Ivona Najdenkoska</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="http://animesh-sinha.com/">Animesh Sinha</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=KJNUEgkAAAAJ">Abhimanyu Dubey</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=Gd9HQn2UsNoC&hl=en">Dhruv Mahajan</a><sup>2</sup>,
+            </span>
+            <br>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=Zdl00bEAAAAJ&hl=en">Vignesh Ramanathan</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://filipradenovic.github.io/">Filip Radenovic</a><sup>2</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Amsterdam,</span>
+            <span class="author-block"><sup>2</sup>GenAI, Meta</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="pdfs/ContextDiffusion_paper.pdf"
+                   class="external-link button is-normal is-rounded">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="pdfs/ContextDiffusion_supp.pdf"
+                   class="external-link button is-normal is-rounded">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2312.03584"
+                   class="external-link button is-normal is-rounded">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="hero teaser">
+  <div class="container">
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay controls muted loop height="100%">
+        <source src="static/videos/teaser.mov" type="video/mp4">
+      </video>
+      <!-- <img src="static/gifs/teaser.gif"> -->
+      <h2 class="subtitle has-text-centered">
+        <b>TL;DR: </b><i>Context Diffusion</i> generates images by learning from visual context examples with and without prompts.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We propose <i>Context Diffusion</i>, a diffusion-based framework that enables image generation models to learn from visual examples presented in context. 
+          </p>
+          <p>
+            Recent work tackles such in-context learning for image generation, where a query image is provided alongside context examples and text prompts. However, the quality and fidelity of the generated images deteriorate when the prompt is not present, demonstrating that these models are unable to truly learn from the visual context. To address this, we propose a novel framework that separates the encoding of the visual context and preserving the structure of the query images. This results in the ability to learn from the visual context and text prompts, but also from either one of them.
+          </p> 
+          <p>
+            Furthermore, we enable our model to handle few-shot settings, to effectively address diverse in-context learning scenarios.
+            Our experiments and user study demonstrate that Context Diffusion excels in both in-domain and out-of-domain tasks, resulting in an overall enhancement in image quality and fidelity compared to counterpart models.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">How does it work?</h2>
+        <div class="content has-text-justified">
+          <p><b>Architecture.</b> Context Diffusion framework consists of a Latent Diffusion Model (LDM) backbone and frozen Vision and Text encoders. The core of the framework is encoding the conditioning information: the visual context encompassing k-images and the text prompt. The visual control image, i.e. the query image serves to define the structure of the output, similarly to <a href="https://arxiv.org/abs/2302.05543" style="color: black;">ControlNet</a>.</p>
+          <p> <b>Modified cross-attention.</b> The visual and textual conditioning should be at the same level to enable balanced learning. Therefore we extract their features using pre-trained vision and text encoders and inject the concatenated representation into the LDM backbone via cross-attention. </p>
+          <img src="static/gifs/gif_model.gif">
+          <p><b>Training & Inference.</b> Context Diffusion is trained using {HED, segmentation, depth}-to-image tasks and vice versa. At inference time, we use the test partition to test the ability to handle various in-domain tasks. We consider additonal out-of-domain tasks such as: image editing, canny edges, scribbles, normal maps and hand-drawn sketches.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title has-text-centered">In-domian {HED, seg, depth}-to-image tasks and vice versa</h2>
+       <div class="item">
+         <h2 class="subtitle has-text-centered">
+          <p>Context Diffusion handles in-domain tasks by leveraging visual signals from the context examples alongside the text prompts.</p>
+        </h2>
+      <img src="static/images/in_domain.png">
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title has-text-centered">Out-of-domain {sketch, scribble, normal map, canny edge}-to-image tasks</h2>
+       <div class="item">
+         <h2 class="subtitle has-text-centered">
+          <p>Context Diffusion can also handle out-of-domain tasks (unseen query images at training time), by truly learning from both the context examples and prompts.</p>
+        </h2>
+      <img src="static/images/out_domain.png">
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title has-text-centered">Out-of-domain tasks: image editing</h2>
+       <div class="item">
+         <h2 class="subtitle has-text-centered">
+          <p>Context Diffusion can also handle image editing tasks, by using a real image as a query and generating its edited version. </p>
+        </h2>
+      <img src="static/images/editing_examples.png">
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title has-text-centered">Comparison when using only visual context examples</h2>
+       <div class="item">
+         <h2 class="subtitle has-text-centered">
+          <p>Context Diffusion is able to truly learn from context examples, both with and without text prompts.</p>
+        </h2>
+      <img src="static/images/out_domain_only_context.png">
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title has-text-centered">Comparison to <a href="https://arxiv.org/abs/2305.01115">Prompt Diffusion</a>: Using visual context and prompts</h2>
+       <div class="item">
+         <h2 class="subtitle has-text-centered">
+          <p>Context Diffusion generates better quality images by accurately leveraging visual cues from the context.</p>
+        </h2>
+      <img src="static/images/in_domain_examples_to_pd.png">
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title has-text-centered">Comparison to <a href="https://arxiv.org/abs/2305.01115">Prompt Diffusion</a>: Using only visual context</h2>
+       <div class="item">
+         <h2 class="subtitle has-text-centered">
+          <p>Context Diffusion learns from the visual context even without prompts, unlike previous work which overly relies on the text guidance. </p>
+        </h2>
+      <img src="static/images/examples_to_pd.png">
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title has-text-centered">Comparison to <a href="https://arxiv.org/abs/2305.01115">Prompt Diffusion</a> and <a href="https://arxiv.org/abs/2302.05543">ControlNet</a>: Using only text prompts</h2>
+       <div class="item">
+         <h2 class="subtitle has-text-centered">
+          <p>Context Diffusion also handles zero-shot scenarios, when visual context examples are not given.</p>
+        </h2>
+      <img src="static/images/only_prompts.png">
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title has-text-centered">Few-shot image editing</h2>
+       <div class="item">
+         <h2 class="subtitle has-text-centered">
+          <p>Context Diffusion architecture is flexible enough to accommodate multiple context examples. Augmenting the context sequence with additional examples, helps to enrich the visual representation, especially for out-of-domain tasks, such as editing.</p>
+        </h2>
+      <img src="static/images/few_shot_edit.png">
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title has-text-centered">Few-shot sketch-to-image generation</h2>
+       <div class="item">
+         <h2 class="subtitle has-text-centered">
+          <p>Context Diffusion handles also few-shot examples for sketch-to-image generation. More image examples help in generating images with better context fidelity. </p>
+        </h2>
+      <img src="static/images/few_shot_sketch.png">
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- How does it work. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Takeaways</h2>
+        <div class="content has-text-justified">
+          We present <i>Context Diffusion</i> - an in-context-aware image generation framework, able to learn from variable number of context examples and prompts. 
+          <ul>
+            <li>Learns strong visual characteristics from the context examples, even without text prompts.</li>
+            <li>Adapts to a different number of visual context examples, enabling few-shot scenarios.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+      @article{najdenkoska2023context,
+               title={Context Diffusion: In-Context Aware Image Generation}, 
+               author={Ivona Najdenkoska and Animesh Sinha and Abhimanyu Dubey and Dhruv Mahajan and Vignesh Ramanathan and Filip Radenovic},
+               year={2023},
+               eprint={2312.03584},
+               archivePrefix={arXiv},
+               primaryClass={cs.CV}
+               }
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
