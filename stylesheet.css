@@ -134,3 +134,116 @@ span.highlight {
   color: blueviolet;
   font-weight: bold;
 }
+
+/* Mobile responsive styles */
+@media screen and (max-width: 768px) {
+  /* Stack all table cells vertically on mobile for better readability */
+  table tbody tr td {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Reorder paper entries: text first, then image below */
+  /* Make table rows flex containers to enable reordering */
+  table tbody tr {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Default order for all cells */
+  table tbody tr td {
+    order: 0 !important;
+  }
+  
+  /* Heading sections: Keep heading first (order: 1), then content (order: 2) */
+  /* Target rows where first cell contains heading element */
+  table tbody tr td:first-child heading {
+    /* Parent cell will be ordered */
+  }
+  
+  /* For heading sections, ensure first cell (heading) comes first */
+  table tbody tr td:first-child:has(heading) {
+    order: 1 !important;
+  }
+  
+  /* For heading sections, ensure second cell (content) comes second */
+  table tbody tr td:first-child:has(heading) ~ td {
+    order: 2 !important;
+    text-align: left !important;
+  }
+  
+  /* Paper entries: Text appears first (order: 1), Image appears second (order: 2) */
+  /* Target rows where first cell contains .one div (paper images) */
+  table tbody tr td:first-child .one {
+    /* Parent cell will be reordered */
+  }
+  
+  /* Text appears first (order: 1) - only for paper entry rows */
+  table tbody tr td:first-child:has(.one) ~ td {
+    order: 1 !important;
+    text-align: left !important;
+  }
+  
+  /* Image appears second (order: 2) - only for paper entry rows */
+  table tbody tr td:first-child:has(.one) {
+    order: 2 !important;
+    text-align: center !important;
+    padding: 15px 20px !important;
+  }
+  
+  /* Specific rule for "Uncertainty-aware Report Generation" paper - target by image filename */
+  table tbody tr td:first-child:has(img[src*="media_model.jpg"]) {
+    order: 2 !important;
+    text-align: center !important;
+    padding: 15px 20px !important;
+  }
+  
+  table tbody tr td:first-child:has(img[src*="media_model.jpg"]) ~ td {
+    order: 1 !important;
+    text-align: left !important;
+  }
+  
+  /* Keep single-cell rows in normal order */
+  table tbody tr td:only-child {
+    order: 0 !important;
+  }
+  
+  /* Target paper images specifically (inside .one divs) - make them larger */
+  table tbody tr td:first-child .one img,
+  table tbody tr td:first-child img {
+    width: 85% !important;
+    min-width: 250px !important;
+    max-width: 320px !important;
+    height: auto !important;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  /* Make profile image responsive but not too large */
+  table tbody tr:first-child td:last-child img {
+    max-width: 200px !important;
+    width: 100% !important;
+  }
+  
+  /* Make other images responsive */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Ensure text doesn't overflow */
+  body, td, th, tr, p, a {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Adjust font sizes slightly for mobile */
+  name {
+    font-size: 28px;
+  }
+  
+  heading {
+    font-size: 20px;
+  }
+}
